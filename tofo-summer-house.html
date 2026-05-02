@@ -1,0 +1,1720 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tofo Summer House | Gestão Níquel</title>
+    <meta name="description" content="Arrendamento de villas de luxo na Praia do Tofo, Inhambane. Curadoria exclusiva por Níquel.">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg:       #080808;
+            --bg-card:  #111111;
+            --bg-card2: #181818;
+            --border:   rgba(255,255,255,0.07);
+            --primary:  #C9373F;
+            --gold:     #C9A84C;
+            --gold-lt:  #E4C97A;
+            --white:    #F5F2EC;
+            --gray:     #888;
+            --ease:     cubic-bezier(.4,0,.2,1);
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--white); font-family: 'DM Sans', sans-serif; overflow-x: hidden; line-height: 1.6; }
+
+        .display { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; }
+        .serif    { font-family: 'Cormorant Garamond', serif; }
+        .gold     { color: var(--gold); }
+        .red      { color: var(--primary); }
+        .gray     { color: var(--gray); }
+
+        /* ─── SPA ─── */
+        .page { display: none; min-height: 100svh; animation: pageIn .45s var(--ease); }
+        .page.active { display: block; }
+        @keyframes pageIn { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:none; } }
+
+        /* ─── HEADER ─── */
+        header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+            height: 72px;
+            display: flex; align-items: center;
+            background: rgba(8,8,8,.92);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 5%;
+            justify-content: space-between;
+        }
+        .logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: .1em; color: var(--white); cursor: pointer; }
+        .logo span { color: var(--gold); }
+        nav ul { display: flex; list-style: none; gap: 8px; align-items: center; }
+        nav a {
+            color: var(--gray); text-decoration: none; font-size: .78rem; font-weight: 500;
+            text-transform: uppercase; letter-spacing: .08em; padding: 8px 14px;
+            border-radius: 4px; cursor: pointer; transition: color .2s, background .2s;
+        }
+        nav a:hover { color: var(--white); background: rgba(255,255,255,.06); }
+        nav a.active-link { color: var(--gold); }
+        .hamburger { display: none; background: none; border: none; color: var(--white); font-size: 1.4rem; cursor: pointer; }
+
+        /* ─── MOBILE NAV ─── */
+        .mobile-nav {
+            display: none; position: fixed; top: 72px; left: 0; right: 0; z-index: 899;
+            background: rgba(8,8,8,.98); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border); padding: 20px 5%;
+            flex-direction: column; gap: 4px;
+        }
+        .mobile-nav.open { display: flex; }
+        .mobile-nav a {
+            color: var(--gray); text-decoration: none; font-size: .9rem; font-weight: 500;
+            text-transform: uppercase; letter-spacing: .08em; padding: 14px 0;
+            border-bottom: 1px solid var(--border); cursor: pointer; transition: color .2s;
+        }
+        .mobile-nav a:hover { color: var(--gold); }
+        .mobile-nav a:last-child { border-bottom: none; }
+
+        .pt { padding-top: 72px; }
+
+        /* ─── HERO ─── */
+        #home { position: relative; min-height: 100svh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .hero-bg {
+            position: absolute; inset: 0;
+            background: url('https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=1920&q=90') center/cover no-repeat;
+        }
+        .hero-bg::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(to bottom, rgba(8,8,8,.18) 0%, rgba(8,8,8,.32) 55%, rgba(8,8,8,.92) 100%);
+        }
+        @media (max-width: 768px) {
+            .hero-bg::after {
+                background: linear-gradient(to bottom, rgba(8,8,8,.10) 0%, rgba(8,8,8,.22) 50%, rgba(8,8,8,.95) 100%);
+            }
+        }
+        .hero-content { position: relative; z-index: 1; text-align: center; padding: 0 20px; max-width: 900px; }
+        @media (max-width: 768px) {
+            .hero-content {
+                text-align: left;
+                padding: 0 22px;
+                max-width: 100%;
+            }
+            .hero-cta { justify-content: flex-start; }
+        }
+        .hero-eyebrow {
+            display: inline-block; font-family: 'Cormorant Garamond', serif; font-style: italic;
+            font-size: 1.35rem; color: var(--gold-lt); margin-bottom: 16px; opacity: .9;
+            text-shadow: 0 2px 12px rgba(0,0,0,.7);
+        }
+        .hero-title {
+            font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem, 12vw, 9rem); line-height: .95; letter-spacing: .03em;
+            text-shadow: 0 4px 24px rgba(0,0,0,.6);
+        }
+        .hero-sub { margin: 28px auto 40px; font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; max-width: 560px; color: rgba(245,242,236,.92); line-height: 1.7;
+            text-shadow: 0 2px 10px rgba(0,0,0,.8);
+        }
+        @media (max-width: 768px) {
+            .hero-sub { margin-left: 0; margin-right: 0; font-size: 1.05rem; }
+        }
+
+        .hero-cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+        .btn {
+            display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px;
+            font-size: .8rem; font-weight: 500; text-transform: uppercase; letter-spacing: .12em;
+            border-radius: 3px; cursor: pointer; border: none; transition: all .25s var(--ease); text-decoration: none;
+        }
+        .btn-gold { background: var(--gold); color: #080808; }
+        .btn-gold:hover { background: var(--gold-lt); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,.35); }
+        .btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,.3); }
+        .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+        .btn-red { background: var(--primary); color: white; }
+        .btn-red:hover { background: #a02b31; }
+        .btn-ghost { background: rgba(255,255,255,.07); color: var(--white); border: 1px solid var(--border); }
+        .btn-ghost:hover { background: rgba(255,255,255,.12); }
+        .btn-sm { padding: 9px 18px; font-size: .72rem; }
+        .btn-block { width: 100%; justify-content: center; }
+
+        .scroll-hint {
+            position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center; gap: 8px;
+            font-size: .7rem; letter-spacing: .15em; text-transform: uppercase;
+            color: rgba(255,255,255,.4); animation: bounce 2s infinite;
+        }
+        @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0);} 50%{transform:translateX(-50%) translateY(6px);} }
+
+        /* ─── SECTION HEADING ─── */
+        .section-head { text-align: center; margin-bottom: 60px; }
+        .section-label { display: inline-block; font-size: .68rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+        .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem,6vw,4rem); }
+        .section-desc { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--gray); margin-top: 10px; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .section-pad { padding: 100px 0; }
+        .divider { width: 48px; height: 2px; background: var(--gold); margin: 0 auto 24px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+
+        /* ─── HOUSE CARD ─── */
+        .house-card {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px;
+            overflow: hidden; position: relative; transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+        }
+        .house-card:hover { transform: translateY(-4px); box-shadow: 0 20px 48px rgba(0,0,0,.6); }
+        .house-card.sold-out { opacity: .55; filter: grayscale(.85); pointer-events: none; }
+        .sold-badge {
+            position: absolute; top: 16px; right: 16px; z-index: 3;
+            background: var(--primary); font-family: 'Bebas Neue', sans-serif;
+            font-size: 1rem; letter-spacing: .1em; padding: 5px 14px; border-radius: 2px;
+        }
+        .house-img-wrap { position: relative; overflow: hidden; height: 220px; }
+        .house-img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease); display: block; }
+        .house-card:hover .house-img { transform: scale(1.04); }
+        .house-body { padding: 22px; }
+        .house-title { font-size: 1rem; font-weight: 500; margin-bottom: 6px; }
+        .house-price { color: var(--gold); font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; }
+        .house-actions { margin-top: 16px; display: flex; gap: 10px; flex-wrap: wrap; }
+
+        /* ─── GALLERY SLIDESHOW ─── */
+        .gallery-wrap { position: relative; overflow: hidden; height: 220px; background: #0a0a0a; }
+        .gallery-track { display: flex; height: 100%; transition: transform .4s var(--ease); will-change: transform; }
+        .gallery-slide { flex-shrink: 0; width: 100%; height: 100%; position: relative; }
+        .gallery-slide img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s var(--ease); }
+        .house-card:hover .gallery-slide img { transform: scale(1.04); }
+        .gallery-arrow {
+            position: absolute; top: 50%; transform: translateY(-50%); z-index: 4;
+            background: rgba(8,8,8,.65); border: none; color: var(--white); width: 32px; height: 32px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; font-size: .85rem; transition: background .2s, opacity .2s;
+            backdrop-filter: blur(6px);
+        }
+        .gallery-arrow:hover { background: rgba(201,168,76,.85); }
+        .gallery-arrow.prev { left: 8px; }
+        .gallery-arrow.next { right: 8px; }
+        .gallery-arrow.hidden { opacity: 0; pointer-events: none; }
+        .gallery-dots {
+            position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+            display: flex; gap: 5px; z-index: 4;
+        }
+        .gallery-dot {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: rgba(255,255,255,.4); transition: background .2s, transform .2s; cursor: pointer;
+        }
+        .gallery-dot.active { background: var(--gold); transform: scale(1.3); }
+        .gallery-count {
+            position: absolute; top: 10px; left: 10px; z-index: 4;
+            background: rgba(8,8,8,.6); backdrop-filter: blur(6px);
+            font-size: .68rem; color: var(--white); padding: 3px 9px; border-radius: 20px;
+            letter-spacing: .05em;
+        }
+
+        /* ─── MULTI-PHOTO UPLOAD (admin) ─── */
+        .photos-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 8px;
+        }
+        .photo-thumb {
+            position: relative; aspect-ratio: 1; border-radius: 4px; overflow: hidden;
+            background: rgba(255,255,255,.04); border: 1px solid var(--border);
+        }
+        .photo-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .photo-thumb .del-btn {
+            position: absolute; top: 3px; right: 3px; background: rgba(201,55,63,.85);
+            border: none; color: white; width: 20px; height: 20px; border-radius: 50%;
+            font-size: .65rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
+        }
+        .photo-thumb.add-slot {
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            color: var(--gray); font-size: 1.3rem; transition: color .2s, border-color .2s;
+        }
+        .photo-thumb.add-slot:hover { color: var(--gold); border-color: var(--gold); }
+        .photo-thumb.add-slot input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+
+
+        #sobre { background: linear-gradient(to bottom, var(--bg), #0e0e0e, var(--bg)); }
+        .sobre-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px; align-items: center; }
+        .sobre-img-wrap { position: relative; }
+        .sobre-img { width: 100%; border-radius: 4px; filter: grayscale(.2) contrast(1.05); display: block; }
+        .sobre-img-wrap::before {
+            content: ''; position: absolute; inset: -12px -12px 12px 12px;
+            border: 1px solid var(--gold); border-radius: 4px; z-index: -1; opacity: .35;
+        }
+        .sobre-label { font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--gold); font-size: 1.1rem; }
+        .sobre-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem,8vw,5.5rem); color: var(--white); line-height: 1; }
+        .sobre-text { color: rgba(245,242,236,.7); font-size: .95rem; line-height: 1.8; margin-top: 20px; }
+        .stats { display: flex; gap: 40px; margin-top: 36px; }
+        .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.8rem; color: var(--gold); line-height: 1; }
+        .stat-lbl { font-size: .75rem; color: var(--gray); text-transform: uppercase; letter-spacing: .1em; }
+
+        /* ─── LOGIN ─── */
+        .login-card { max-width: 420px; margin: 0 auto; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 48px 40px; }
+        .form-group { margin-bottom: 16px; }
+        .form-label { display: block; font-size: .72rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gray); margin-bottom: 8px; }
+        .form-input {
+            width: 100%; padding: 12px 16px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1);
+            color: var(--white); border-radius: 4px; font-family: 'DM Sans', sans-serif; font-size: .9rem; transition: border-color .2s; outline: none;
+        }
+        .form-input:focus { border-color: var(--gold); }
+        .form-input::placeholder { color: rgba(255,255,255,.2); }
+        select.form-input option { background: #1a1a1a; }
+
+        /* ─── ADMIN PANEL ─── */
+        .admin-tabs { display: flex; gap: 4px; background: rgba(255,255,255,.04); border: 1px solid var(--border); border-radius: 8px; padding: 4px; margin-bottom: 32px; flex-wrap: wrap; }
+        .admin-tab { flex: 1; min-width: 120px; padding: 10px 16px; border: none; background: transparent; color: var(--gray); font-family: 'DM Sans', sans-serif; font-size: .78rem; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; cursor: pointer; border-radius: 5px; transition: all .2s; }
+        .admin-tab.active { background: var(--gold); color: #080808; }
+        .admin-tab:hover:not(.active) { color: var(--white); background: rgba(255,255,255,.06); }
+
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+
+        .admin-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 28px; margin-top: 8px; }
+        .admin-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 32px; }
+        .admin-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: .06em; color: var(--gold); margin-bottom: 20px; }
+
+        /* ─── APARÊNCIA EDITOR ─── */
+        .appearance-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .appearance-section {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 24px;
+        }
+        .appearance-section h4 { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; color: var(--gold); margin-bottom: 16px; letter-spacing: .06em; display: flex; align-items: center; gap: 8px; }
+        .color-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; gap: 12px; }
+        .color-row label { font-size: .78rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--gray); flex: 1; }
+        .color-input-wrap { display: flex; align-items: center; gap: 8px; }
+        .color-swatch {
+            width: 36px; height: 36px; border-radius: 6px; border: 2px solid rgba(255,255,255,.15);
+            cursor: pointer; padding: 0; background: none; position: relative; overflow: hidden; flex-shrink: 0;
+        }
+        .color-swatch input[type="color"] {
+            position: absolute; inset: -4px; width: calc(100% + 8px); height: calc(100% + 8px);
+            border: none; padding: 0; cursor: pointer; opacity: 0;
+        }
+        .hex-label { font-size: .72rem; font-family: monospace; color: var(--gray); min-width: 60px; }
+        .img-input-row { margin-bottom: 14px; }
+        .img-input-row label { display: block; font-size: .78rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--gray); margin-bottom: 8px; }
+        .img-preview { width: 100%; height: 120px; object-fit: cover; border-radius: 6px; margin-bottom: 8px; display: block; border: 1px solid var(--border); }
+        .apply-btn { margin-top: 20px; }
+
+        /* ─── PROVINCIAS ─── */
+        .prov-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; transition: transform .3s var(--ease); }
+        .prov-card:hover { transform: translateY(-4px); }
+        .prov-img { width: 100%; height: 200px; object-fit: cover; display: block; }
+        .prov-body { padding: 20px; }
+        .prov-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--gold); letter-spacing: .06em; }
+        .prov-desc { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--gray); margin-top: 6px; }
+
+        /* ─── WHATSAPP ─── */
+        .wa-btn {
+            position: fixed; bottom: 28px; right: 28px; z-index: 800;
+            width: 56px; height: 56px; background: #25D366; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
+            color: white; text-decoration: none; box-shadow: 0 4px 20px rgba(37,211,102,.45);
+            transition: transform .25s, box-shadow .25s;
+        }
+        .wa-btn:hover { transform: scale(1.1); box-shadow: 0 8px 28px rgba(37,211,102,.55); }
+
+        /* ─── FOOTER ─── */
+        footer { border-top: 1px solid var(--border); padding: 40px 5%; text-align: center; font-size: .78rem; color: var(--gray); }
+        footer span { color: var(--gold); }
+
+        /* ─── TOAST ─── */
+        .toast {
+            position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%) translateY(20px);
+            background: var(--bg-card2); border: 1px solid var(--border); padding: 12px 24px;
+            border-radius: 6px; font-size: .85rem; color: var(--white); opacity: 0;
+            pointer-events: none; transition: opacity .3s, transform .3s; z-index: 9999; white-space: nowrap;
+        }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+        .empty-state { grid-column: 1/-1; text-align: center; padding: 60px 20px; color: var(--gray); font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; }
+
+        /* ─── CONTENT EDITOR ─── */
+        .content-editor-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+        .content-block { background: var(--bg-card2); border: 1px solid var(--border); border-radius: 6px; padding: 20px; }
+        .content-block h5 { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; color: var(--gold); margin-bottom: 12px; letter-spacing: .06em; }
+        .content-block textarea { resize: vertical; min-height: 80px; }
+
+        /* ─── MOBILE: hide highlights stats ─── */
+        @media (max-width: 768px) {
+            #hero-highlights { display: none !important; }
+        }
+
+        /* ─── DATE PICKER ─── */
+        .date-picker-row {
+            display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap;
+        }
+        .date-picker-row label {
+            display: block; font-size: .65rem; font-weight: 500; letter-spacing: .08em;
+            text-transform: uppercase; color: var(--gray); margin-bottom: 4px;
+        }
+        .date-picker-row input[type="date"] {
+            background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12);
+            color: var(--white); border-radius: 4px; padding: 8px 10px;
+            font-family: 'DM Sans', sans-serif; font-size: .8rem; outline: none;
+            width: 100%; transition: border-color .2s; color-scheme: dark;
+        }
+        .date-picker-row input[type="date"]:focus { border-color: var(--gold); }
+        .date-picker-row .date-field { flex: 1; min-width: 120px; }
+
+        /* ─── FILE UPLOAD ─── */
+        .file-upload-wrap { position: relative; margin-bottom: 8px; }
+        .file-upload-wrap input[type="file"] {
+            position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+        }
+        .file-upload-btn {
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            padding: 10px 16px; background: rgba(255,255,255,.05);
+            border: 1px dashed rgba(255,255,255,.2); border-radius: 4px;
+            color: var(--gray); font-size: .8rem; cursor: pointer;
+            transition: border-color .2s, color .2s;
+        }
+        .file-upload-btn:hover { border-color: var(--gold); color: var(--gold); }
+        .upload-or { text-align: center; font-size: .72rem; color: var(--gray); margin: 6px 0; }
+
+        /* ─── ADMIN PREVIEW LIST ─── */
+        .admin-house-row {
+            display: flex; align-items: center; gap: 16px; padding: 16px; background: var(--bg-card2);
+            border: 1px solid var(--border); border-radius: 6px; margin-bottom: 10px;
+        }
+        .admin-house-row img { width: 60px; height: 60px; object-fit: cover; border-radius: 4px; flex-shrink: 0; }
+        .admin-house-row .info { flex: 1; }
+        .admin-house-row .info .title { font-size: .9rem; font-weight: 500; }
+        .admin-house-row .info .price { color: var(--gold); font-family: 'Cormorant Garamond', serif; font-size: .9rem; }
+        .admin-house-row .actions { display: flex; gap: 8px; flex-shrink: 0; }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 768px) {
+            nav ul { display: none; }
+            .hamburger { display: block; }
+            .sobre-grid { grid-template-columns: 1fr; gap: 40px; }
+            .admin-grid { grid-template-columns: 1fr; }
+            .hero-title { font-size: clamp(3.5rem,14vw,6rem); }
+            .sobre-img-wrap::before { display: none; }
+            .login-card { padding: 32px 24px; }
+            .appearance-grid { grid-template-columns: 1fr; }
+            .admin-tabs { gap: 2px; }
+            .admin-tab { min-width: 90px; font-size: .7rem; padding: 8px 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════ HEADER ══════════════════════════════ -->
+<header>
+    <div class="logo" onclick="showPage('home')">TOFO <span>SUMMER</span></div>
+    <nav>
+        <ul id="desktop-nav">
+            <li><a onclick="showPage('home')" data-page="home">Início</a></li>
+            <li><a onclick="showPage('reservas')" data-page="reservas">Villas</a></li>
+            <li><a onclick="showPage('provincias')" data-page="provincias">Províncias</a></li>
+            <li><a onclick="showPage('sobre')" data-page="sobre">O Dono</a></li>
+            <li id="nav-login"><a onclick="showPage('login-screen')" data-page="login-screen"><i class="fas fa-lock" style="font-size:.7rem;margin-right:4px;"></i>Painel</a></li>
+            <li id="nav-logout" style="display:none;"><a onclick="logout()" style="color:var(--primary);"><i class="fas fa-sign-out-alt" style="font-size:.7rem;margin-right:4px;"></i>Sair</a></li>
+        </ul>
+    </nav>
+    <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Menu"><i class="fas fa-bars"></i></button>
+</header>
+
+<!-- Mobile nav -->
+<div class="mobile-nav" id="mobile-nav">
+    <a onclick="navGo('home')">Início</a>
+    <a onclick="navGo('reservas')">Villas</a>
+    <a onclick="navGo('provincias')">Províncias</a>
+    <a onclick="navGo('sobre')">O Dono</a>
+    <a id="mob-login" onclick="navGo('login-screen')"><i class="fas fa-lock" style="margin-right:6px;"></i>Painel Admin</a>
+    <a id="mob-logout" style="display:none;color:var(--primary);" onclick="logout()"><i class="fas fa-sign-out-alt" style="margin-right:6px;"></i>Sair (Níquel)</a>
+</div>
+
+<!-- ══════════════════════════════ HOME ══════════════════════════════ -->
+<div class="page active" id="home">
+    <div style="position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+        <div class="hero-bg" id="hero-bg-el"></div>
+        <div class="hero-content">
+            <span class="hero-eyebrow" id="hero-eyebrow-el">Bem-vindo à experiência</span>
+            <h1 class="hero-title" id="hero-title-el">Tofo Summer<br><span class="gold">House</span></h1>
+            <p class="hero-sub" id="hero-sub-el">Arrendamento de luxo sob a curadoria de <em>Níquel</em>. O melhor da Praia do Tofo — exclusivo, privado e inesquecível.</p>
+            <div class="hero-cta">
+                <button class="btn btn-gold" onclick="showPage('reservas')"><i class="fas fa-home"></i> Explorar Villas</button>
+                <button class="btn btn-outline" onclick="showPage('sobre')">Conhecer o Dono</button>
+            </div>
+        </div>
+        <div class="scroll-hint"><i class="fas fa-chevron-down"></i> Scroll</div>
+    </div>
+
+    <!-- Highlights -->
+    <div id="hero-highlights" style="padding:80px 0;background:rgba(255,255,255,.02);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+        <div class="container">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:40px;text-align:center;">
+                <div>
+                    <div style="font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:var(--gold);" id="stat1-num">+50K</div>
+                    <div style="font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gray);" id="stat1-lbl">Reservas feitas</div>
+                </div>
+                <div>
+                    <div style="font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:var(--gold);" id="stat2-num">4.9★</div>
+                    <div style="font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gray);" id="stat2-lbl">Avaliação média</div>
+                </div>
+                <div>
+                    <div style="font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:var(--gold);" id="stat3-num">10+</div>
+                    <div style="font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gray);" id="stat3-lbl">Villas exclusivas</div>
+                </div>
+                <div>
+                    <div style="font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:var(--gold);" id="stat4-num">2015</div>
+                    <div style="font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gray);" id="stat4-lbl">Fundação da marca</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════ VILLAS ══════════════════════════════ -->
+<div class="page pt" id="reservas">
+    <div class="container section-pad">
+        <div class="section-head">
+            <div class="section-label"><i class="fas fa-gem" style="margin-right:6px;"></i> Portfólio Exclusivo</div>
+            <h2 class="section-title">Villas de <span class="gold">Luxo</span></h2>
+            <div class="divider" style="margin-top:20px;"></div>
+            <p class="section-desc" id="villas-desc">Cada propriedade é selecionada pessoalmente por Níquel para garantir padrão premium.</p>
+        </div>
+        <div class="grid-3" id="display-houses">
+            <div class="empty-state"><i class="fas fa-home" style="margin-right:8px;opacity:.4;"></i> A carregar villas...</div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════ PROVÍNCIAS ══════════════════════════════ -->
+<div class="page pt" id="provincias">
+    <div class="container section-pad">
+        <div class="section-head">
+            <div class="section-label"><i class="fas fa-map-marked-alt" style="margin-right:6px;"></i> Destinos</div>
+            <h2 class="section-title">Turismo em <span class="gold">Moçambique</span></h2>
+            <div class="divider" style="margin-top:20px;"></div>
+            <p class="section-desc" id="provs-desc">Descubra os destinos mais deslumbrantes do país.</p>
+        </div>
+        <div class="grid-3" id="display-provincias">
+            <div class="empty-state">A carregar províncias...</div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════ SOBRE ══════════════════════════════ -->
+<div class="page pt" id="sobre">
+    <div class="container section-pad">
+        <div class="sobre-grid">
+            <div class="sobre-img-wrap">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80" alt="Níquel" class="sobre-img" id="sobre-img-el">
+            </div>
+            <div>
+                <div class="section-label">Fundador & Curador</div>
+                <div class="sobre-name" id="sobre-name-el">Níquel</div>
+                <div class="sobre-label" id="sobre-role-el">CEO — Tofo Summer House</div>
+                <p class="sobre-text" id="sobre-text1-el">Desde 2015, Níquel tem redefinido o mercado de arrendamento premium em Inhambane. Com um olhar apurado para a exclusividade e uma dedicação inabalável ao atendimento personalizado, cada villa é selecionada com critérios rigorosos para oferecer experiências verdadeiramente inesquecíveis na Praia do Tofo.</p>
+                <p class="sobre-text" style="margin-top:12px;" id="sobre-text2-el">Acreditamos que férias de luxo não se resumem a um imóvel bonito — é sobre a sensação de pertença, privacidade e a magia única do Índico.</p>
+                <div class="stats">
+                    <div>
+                        <div class="stat-num" id="ss1-num">50K+</div>
+                        <div class="stat-lbl">Reservas</div>
+                    </div>
+                    <div>
+                        <div class="stat-num" id="ss2-num">4.9</div>
+                        <div class="stat-lbl">Avaliação</div>
+                    </div>
+                    <div>
+                        <div class="stat-num" id="ss3-num">9</div>
+                        <div class="stat-lbl">Anos ativos</div>
+                    </div>
+                </div>
+                <div style="margin-top:36px;">
+                    <a href="https://wa.me/258840000000" class="btn btn-gold" target="_blank"><i class="fab fa-whatsapp"></i> Contactar Níquel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════ LOGIN ══════════════════════════════ -->
+<div class="page pt" id="login-screen">
+    <div class="container section-pad">
+        <div class="login-card">
+            <div style="text-align:center;margin-bottom:36px;">
+                <i class="fas fa-shield-alt" style="font-size:2rem;color:var(--gold);margin-bottom:12px;display:block;"></i>
+                <div class="display" style="font-size:1.8rem;letter-spacing:.08em;">Painel do Dono</div>
+                <div style="color:var(--gray);font-family:'Cormorant Garamond',serif;font-size:1rem;margin-top:6px;">Acesso exclusivo — Níquel</div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">E-mail</label>
+                <input type="email" id="admin-email" class="form-input" placeholder="niquel@tofo.com" autocomplete="username">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Senha</label>
+                <input type="password" id="admin-pass" class="form-input" placeholder="••••••••" autocomplete="current-password" onkeypress="if(event.key==='Enter')login()">
+            </div>
+            <button class="btn btn-gold btn-block" style="margin-top:8px;" onclick="login()">
+                <i class="fas fa-sign-in-alt"></i> Entrar no Painel
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════ ADMIN ══════════════════════════════ -->
+<div class="page pt" id="admin-panel">
+    <div class="container section-pad">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:32px;">
+            <div>
+                <div class="section-label"><i class="fas fa-cog" style="margin-right:6px;"></i> Gestão Níquel</div>
+                <h2 class="display" style="font-size:2.5rem;">Painel <span class="gold">Administrativo</span></h2>
+            </div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                <button class="btn btn-ghost btn-sm" onclick="if(confirm('Resetar todos os dados?'))resetData()"><i class="fas fa-undo"></i> Resetar</button>
+                <button class="btn btn-red btn-sm" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Sair</button>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="admin-tabs">
+            <button class="admin-tab active" onclick="switchTab('tab-villas')"><i class="fas fa-home" style="margin-right:6px;"></i>Villas</button>
+            <button class="admin-tab" onclick="switchTab('tab-provincias')"><i class="fas fa-map-marker-alt" style="margin-right:6px;"></i>Províncias</button>
+            <button class="admin-tab" onclick="switchTab('tab-aparencia')"><i class="fas fa-palette" style="margin-right:6px;"></i>Aparência</button>
+            <button class="admin-tab" onclick="switchTab('tab-conteudo')"><i class="fas fa-pen" style="margin-right:6px;"></i>Conteúdo</button>
+            <button class="admin-tab" onclick="switchTab('tab-config')"><i class="fas fa-sliders-h" style="margin-right:6px;"></i>Configurações</button>
+        </div>
+
+        <!-- TAB: VILLAS -->
+        <div class="tab-panel active" id="tab-villas">
+            <div class="admin-grid">
+                <div class="admin-card">
+                    <h3><i class="fas fa-plus" style="margin-right:8px;font-size:1rem;"></i> Adicionar Villa</h3>
+                    <div class="form-group">
+                        <label class="form-label">Nome da Villa</label>
+                        <input type="text" id="h-title" class="form-input" placeholder="Ex: Níquel Elite Villa">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Preço por noite</label>
+                        <input type="text" id="h-price" class="form-input" placeholder="Ex: 10.000 MT">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Fotos da Villa <span style="color:var(--gray);font-size:.68rem;font-weight:400;text-transform:none;">(até 10 fotos)</span></label>
+                        <div class="photos-grid" id="h-photos-grid">
+                            <div class="photo-thumb add-slot" onclick="document.getElementById('h-add-photo').click()" title="Adicionar foto">
+                                <i class="fas fa-plus"></i>
+                                <input type="file" id="h-add-photo" accept="image/*" multiple style="display:none;" onchange="handleMultiPhotoAdd(this,'h-photos-grid')">
+                            </div>
+                        </div>
+                        <div class="upload-or" style="margin-top:8px;">— ou cole um link —</div>
+                        <div style="display:flex;gap:6px;margin-top:4px;">
+                            <input type="url" id="h-img-url-add" class="form-input" placeholder="https://..." style="flex:1;">
+                            <button type="button" class="btn btn-ghost btn-sm" onclick="addPhotoByUrl('h-img-url-add','h-photos-grid')"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Status</label>
+                        <select id="h-status" class="form-input">
+                            <option value="available">Disponível</option>
+                            <option value="sold">Esgotado</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-gold btn-block" onclick="addHouse()"><i class="fas fa-plus"></i> Adicionar Villa</button>
+                </div>
+
+                <div class="admin-card">
+                    <h3><i class="fas fa-list" style="margin-right:8px;font-size:1rem;"></i> Villas Cadastradas</h3>
+                    <div id="admin-houses-preview"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: PROVÍNCIAS -->
+        <div class="tab-panel" id="tab-provincias">
+            <div class="admin-grid">
+                <div class="admin-card">
+                    <h3><i class="fas fa-map-pin" style="margin-right:8px;font-size:1rem;"></i> Adicionar Destino</h3>
+                    <div class="form-group">
+                        <label class="form-label">Nome da Província</label>
+                        <input type="text" id="p-name" class="form-input" placeholder="Ex: Inhambane">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Descrição Turística</label>
+                        <input type="text" id="p-desc" class="form-input" placeholder="Ex: Praia paradisíaca do Índico">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Foto da Província</label>
+                        <div class="file-upload-wrap">
+                            <div class="file-upload-btn"><i class="fas fa-cloud-upload-alt"></i> Escolher ficheiro do dispositivo</div>
+                            <input type="file" id="p-img-file" accept="image/*" onchange="handleProvFileUpload(this)">
+                        </div>
+                        <div class="upload-or">— ou cole um link —</div>
+                        <input type="url" id="p-img" class="form-input" placeholder="https://..." oninput="previewImg('p-img','p-img-preview')">
+                        <img id="p-img-preview" class="img-preview" src="" style="display:none;margin-top:8px;" alt="Preview">
+                    </div>
+                    <button class="btn btn-gold btn-block" onclick="addProvincia()"><i class="fas fa-map-pin"></i> Salvar Destino</button>
+                </div>
+                <div class="admin-card">
+                    <h3><i class="fas fa-list" style="margin-right:8px;font-size:1rem;"></i> Destinos Cadastrados</h3>
+                    <div id="admin-provs-preview"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: APARÊNCIA -->
+        <div class="tab-panel" id="tab-aparencia">
+            <div style="margin-bottom:20px;">
+                <p style="color:var(--gray);font-family:'Cormorant Garamond',serif;font-size:1.05rem;">Personalize as cores e imagens de cada secção do site. As alterações são guardadas automaticamente.</p>
+            </div>
+            <div class="appearance-grid">
+
+                <!-- Cores Globais -->
+                <div class="appearance-section">
+                    <h4><i class="fas fa-swatchbook"></i> Paleta de Cores</h4>
+                    <div class="color-row">
+                        <label>Cor Dourada (destaques)</label>
+                        <div class="color-input-wrap">
+                            <div class="color-swatch" id="sw-gold" style="background:#C9A84C;">
+                                <input type="color" value="#C9A84C" oninput="updateColor('--gold', this.value, 'sw-gold', 'hex-gold')">
+                            </div>
+                            <span class="hex-label" id="hex-gold">#C9A84C</span>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <label>Cor Principal (vermelha)</label>
+                        <div class="color-input-wrap">
+                            <div class="color-swatch" id="sw-primary" style="background:#C9373F;">
+                                <input type="color" value="#C9373F" oninput="updateColor('--primary', this.value, 'sw-primary', 'hex-primary')">
+                            </div>
+                            <span class="hex-label" id="hex-primary">#C9373F</span>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <label>Cor do Texto</label>
+                        <div class="color-input-wrap">
+                            <div class="color-swatch" id="sw-white" style="background:#F5F2EC;">
+                                <input type="color" value="#F5F2EC" oninput="updateColor('--white', this.value, 'sw-white', 'hex-white')">
+                            </div>
+                            <span class="hex-label" id="hex-white">#F5F2EC</span>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <label>Cor de Fundo</label>
+                        <div class="color-input-wrap">
+                            <div class="color-swatch" id="sw-bg" style="background:#080808;">
+                                <input type="color" value="#080808" oninput="updateColor('--bg', this.value, 'sw-bg', 'hex-bg')">
+                            </div>
+                            <span class="hex-label" id="hex-bg">#080808</span>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <label>Cor dos Cards</label>
+                        <div class="color-input-wrap">
+                            <div class="color-swatch" id="sw-bgcard" style="background:#111111;">
+                                <input type="color" value="#111111" oninput="updateColor('--bg-card', this.value, 'sw-bgcard', 'hex-bgcard')">
+                            </div>
+                            <span class="hex-label" id="hex-bgcard">#111111</span>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <label>Cor do Texto Secundário</label>
+                        <div class="color-input-wrap">
+                            <div class="color-swatch" id="sw-gray" style="background:#888888;">
+                                <input type="color" value="#888888" oninput="updateColor('--gray', this.value, 'sw-gray', 'hex-gray')">
+                            </div>
+                            <span class="hex-label" id="hex-gray">#888888</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-gold btn-sm apply-btn" onclick="saveAppearance()"><i class="fas fa-save"></i> Guardar Cores</button>
+                </div>
+
+                <!-- Hero Image -->
+                <div class="appearance-section">
+                    <h4><i class="fas fa-image"></i> Imagem de Fundo (Capa) <span style="font-family:'DM Sans',sans-serif;font-size:.7rem;color:var(--gold-lt);font-weight:400;letter-spacing:0;"> — Em tempo real</span></h4>
+                    <div class="img-input-row">
+                        <label>Pré-visualização</label>
+                        <img id="hero-img-preview" class="img-preview" src="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=800&q=60" alt="Hero" style="height:160px;">
+                        <div class="file-upload-wrap" style="margin-bottom:8px;">
+                            <div class="file-upload-btn"><i class="fas fa-cloud-upload-alt"></i> Upload do dispositivo</div>
+                            <input type="file" accept="image/*" onchange="handleHeroFileUpload(this)">
+                        </div>
+                        <div class="upload-or">— ou cole um link —</div>
+                        <input type="url" id="hero-img-url" class="form-input" placeholder="https://..." oninput="liveHeroUrl(this.value)">
+                    </div>
+                    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;">
+                        <button class="btn btn-gold btn-sm" onclick="applyHeroImage()"><i class="fas fa-check"></i> Guardar</button>
+                        <button class="btn btn-ghost btn-sm" onclick="resetHeroImage()"><i class="fas fa-undo"></i> Repor original</button>
+                    </div>
+                </div>
+
+                <!-- Sobre Image -->
+                <div class="appearance-section">
+                    <h4><i class="fas fa-user"></i> Imagem — Secção "O Dono"</h4>
+                    <div class="img-input-row">
+                        <label>Foto do Dono</label>
+                        <img id="sobre-img-preview" class="img-preview" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=60" alt="Sobre">
+                        <div class="file-upload-wrap" style="margin-bottom:8px;">
+                            <div class="file-upload-btn"><i class="fas fa-cloud-upload-alt"></i> Upload do dispositivo</div>
+                            <input type="file" accept="image/*" onchange="handleSobreFileUpload(this)">
+                        </div>
+                        <div class="upload-or">— ou cole um link —</div>
+                        <input type="url" id="sobre-img-url" class="form-input" placeholder="https://..." oninput="document.getElementById('sobre-img-preview').src=this.value">
+                    </div>
+                    <button class="btn btn-gold btn-sm" onclick="applySobreImage()"><i class="fas fa-check"></i> Aplicar Foto</button>
+                </div>
+
+                <!-- Cores Secção Hero -->
+                <div class="appearance-section">
+                    <h4><i class="fas fa-font"></i> Cores de Texto — Hero</h4>
+                    <div class="color-row">
+                        <label>Texto Eyebrow (topo)</label>
+                        <div class="color-input-wrap">
+                            <div class="color-swatch" id="sw-eyebrow" style="background:#E4C97A;">
+                                <input type="color" value="#E4C97A" oninput="applyDirectColor('#hero-eyebrow-el','color',this.value,'sw-eyebrow','hex-eyebrow')">
+                            </div>
+                            <span class="hex-label" id="hex-eyebrow">#E4C97A</span>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <label>Título Principal</label>
+                        <div class="color-input-wrap">
+                            <div class="color-swatch" id="sw-htitle" style="background:#F5F2EC;">
+                                <input type="color" value="#F5F2EC" oninput="applyDirectColor('#hero-title-el','color',this.value,'sw-htitle','hex-htitle')">
+                            </div>
+                            <span class="hex-label" id="hex-htitle">#F5F2EC</span>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <label>Subtítulo</label>
+                        <div class="color-input-wrap">
+                            <div class="color-swatch" id="sw-hsub" style="background:#F5F2EC;">
+                                <input type="color" value="#F5F2EC" oninput="applyDirectColor('#hero-sub-el','color',this.value,'sw-hsub','hex-hsub')">
+                            </div>
+                            <span class="hex-label" id="hex-hsub">#F5F2EC</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-gold btn-sm apply-btn" onclick="saveAppearance()"><i class="fas fa-save"></i> Guardar</button>
+                </div>
+
+                <!-- Cores Villas & Cards -->
+                <div class="appearance-section">
+                    <h4><i class="fas fa-home"></i> Cores — Secção Villas</h4>
+                    <div class="color-row">
+                        <label>Descrição da Secção</label>
+                        <div class="color-input-wrap">
+                            <div class="color-swatch" id="sw-villasdesc" style="background:#888888;">
+                                <input type="color" value="#888888" oninput="applyDirectColor('#villas-desc','color',this.value,'sw-villasdesc','hex-villasdesc')">
+                            </div>
+                            <span class="hex-label" id="hex-villasdesc">#888888</span>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <label>Preço das Villas</label>
+                        <div class="color-input-wrap">
+                            <div class="color-swatch" id="sw-price" style="background:#C9A84C;">
+                                <input type="color" value="#C9A84C" oninput="setPriceColor(this.value,'sw-price','hex-price')">
+                            </div>
+                            <span class="hex-label" id="hex-price">#C9A84C</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-gold btn-sm apply-btn" onclick="saveAppearance()"><i class="fas fa-save"></i> Guardar</button>
+                </div>
+
+                <!-- Cores Sobre -->
+                <div class="appearance-section">
+                    <h4><i class="fas fa-user-tie"></i> Cores — Secção O Dono</h4>
+                    <div class="color-row">
+                        <label>Nome do Dono</label>
+                        <div class="color-input-wrap">
+                            <div class="color-swatch" id="sw-sname" style="background:#F5F2EC;">
+                                <input type="color" value="#F5F2EC" oninput="applyDirectColor('#sobre-name-el','color',this.value,'sw-sname','hex-sname')">
+                            </div>
+                            <span class="hex-label" id="hex-sname">#F5F2EC</span>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <label>Cargo / Função</label>
+                        <div class="color-input-wrap">
+                            <div class="color-swatch" id="sw-srole" style="background:#C9A84C;">
+                                <input type="color" value="#C9A84C" oninput="applyDirectColor('#sobre-role-el','color',this.value,'sw-srole','hex-srole')">
+                            </div>
+                            <span class="hex-label" id="hex-srole">#C9A84C</span>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <label>Texto Biográfico</label>
+                        <div class="color-input-wrap">
+                            <div class="color-swatch" id="sw-stext" style="background:#F5F2EC;">
+                                <input type="color" value="#F5F2EC" oninput="applyDirectColor('#sobre-text1-el','color',this.value,'sw-stext','hex-stext');applyDirectColor('#sobre-text2-el','color',this.value)">
+                            </div>
+                            <span class="hex-label" id="hex-stext">#F5F2EC</span>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <label>Números de Estatística</label>
+                        <div class="color-input-wrap">
+                            <div class="color-swatch" id="sw-statnum" style="background:#C9A84C;">
+                                <input type="color" value="#C9A84C" oninput="applyStatNumColor(this.value,'sw-statnum','hex-statnum')">
+                            </div>
+                            <span class="hex-label" id="hex-statnum">#C9A84C</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-gold btn-sm apply-btn" onclick="saveAppearance()"><i class="fas fa-save"></i> Guardar</button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- TAB: CONTEÚDO -->
+        <div class="tab-panel" id="tab-conteudo">
+            <div style="margin-bottom:20px;">
+                <p style="color:var(--gray);font-family:'Cormorant Garamond',serif;font-size:1.05rem;">Edite os textos do site. Clique em "Aplicar" para ver as mudanças em tempo real.</p>
+            </div>
+            <div class="admin-grid">
+                <!-- Hero Texts -->
+                <div class="admin-card">
+                    <h3><i class="fas fa-star" style="margin-right:8px;font-size:1rem;"></i> Textos do Hero</h3>
+                    <div class="form-group">
+                        <label class="form-label">Texto Eyebrow (topo)</label>
+                        <input type="text" id="edit-eyebrow" class="form-input" value="Bem-vindo à experiência">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Subtítulo do Hero</label>
+                        <textarea id="edit-sub" class="form-input content-block" style="min-height:80px;resize:vertical;">Arrendamento de luxo sob a curadoria de Níquel. O melhor da Praia do Tofo — exclusivo, privado e inesquecível.</textarea>
+                    </div>
+                    <button class="btn btn-gold btn-block" onclick="applyHeroTexts()"><i class="fas fa-check"></i> Aplicar Textos</button>
+                </div>
+
+                <!-- Stats Home -->
+                <div class="admin-card">
+                    <h3><i class="fas fa-chart-bar" style="margin-right:8px;font-size:1rem;"></i> Estatísticas (Números)</h3>
+                    <div class="form-group">
+                        <label class="form-label">Stat 1 — Número</label>
+                        <input type="text" id="edit-s1n" class="form-input" value="+50K">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Stat 1 — Descrição</label>
+                        <input type="text" id="edit-s1l" class="form-input" value="Reservas feitas">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Stat 2 — Número</label>
+                        <input type="text" id="edit-s2n" class="form-input" value="4.9★">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Stat 2 — Descrição</label>
+                        <input type="text" id="edit-s2l" class="form-input" value="Avaliação média">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Stat 3 — Número</label>
+                        <input type="text" id="edit-s3n" class="form-input" value="10+">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Stat 3 — Descrição</label>
+                        <input type="text" id="edit-s3l" class="form-input" value="Villas exclusivas">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Stat 4 — Número</label>
+                        <input type="text" id="edit-s4n" class="form-input" value="2015">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Stat 4 — Descrição</label>
+                        <input type="text" id="edit-s4l" class="form-input" value="Fundação da marca">
+                    </div>
+                    <button class="btn btn-gold btn-block" onclick="applyStats()"><i class="fas fa-check"></i> Aplicar Estatísticas</button>
+                </div>
+
+                <!-- Sobre Texts -->
+                <div class="admin-card">
+                    <h3><i class="fas fa-user" style="margin-right:8px;font-size:1rem;"></i> Textos — O Dono</h3>
+                    <div class="form-group">
+                        <label class="form-label">Nome do Dono</label>
+                        <input type="text" id="edit-sname" class="form-input" value="Níquel">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Cargo / Função</label>
+                        <input type="text" id="edit-srole" class="form-input" value="CEO — Tofo Summer House">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Parágrafo 1</label>
+                        <textarea id="edit-stext1" class="form-input" style="min-height:100px;resize:vertical;">Desde 2015, Níquel tem redefinido o mercado de arrendamento premium em Inhambane. Com um olhar apurado para a exclusividade e uma dedicação inabalável ao atendimento personalizado, cada villa é selecionada com critérios rigorosos para oferecer experiências verdadeiramente inesquecíveis na Praia do Tofo.</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Parágrafo 2</label>
+                        <textarea id="edit-stext2" class="form-input" style="min-height:80px;resize:vertical;">Acreditamos que férias de luxo não se resumem a um imóvel bonito — é sobre a sensação de pertença, privacidade e a magia única do Índico.</textarea>
+                    </div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
+                        <div class="form-group" style="margin-bottom:0;">
+                            <label class="form-label">Stat 1</label>
+                            <input type="text" id="edit-ss1" class="form-input" value="50K+">
+                        </div>
+                        <div class="form-group" style="margin-bottom:0;">
+                            <label class="form-label">Stat 2</label>
+                            <input type="text" id="edit-ss2" class="form-input" value="4.9">
+                        </div>
+                        <div class="form-group" style="margin-bottom:0;">
+                            <label class="form-label">Stat 3</label>
+                            <input type="text" id="edit-ss3" class="form-input" value="9">
+                        </div>
+                    </div>
+                    <button class="btn btn-gold btn-block" style="margin-top:16px;" onclick="applySobreTexts()"><i class="fas fa-check"></i> Aplicar Textos</button>
+                </div>
+
+                <!-- Descrições Secções -->
+                <div class="admin-card">
+                    <h3><i class="fas fa-align-left" style="margin-right:8px;font-size:1rem;"></i> Descrições das Secções</h3>
+                    <div class="form-group">
+                        <label class="form-label">Descrição — Villas</label>
+                        <textarea id="edit-villasdesc" class="form-input" style="min-height:60px;resize:vertical;">Cada propriedade é selecionada pessoalmente por Níquel para garantir padrão premium.</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Descrição — Províncias</label>
+                        <textarea id="edit-provsdesc" class="form-input" style="min-height:60px;resize:vertical;">Descubra os destinos mais deslumbrantes do país.</textarea>
+                    </div>
+                    <button class="btn btn-gold btn-block" onclick="applySectionDescs()"><i class="fas fa-check"></i> Aplicar Descrições</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: CONFIGURAÇÕES -->
+        <div class="tab-panel" id="tab-config">
+            <div class="admin-grid">
+                <div class="admin-card">
+                    <h3><i class="fas fa-whatsapp" style="margin-right:8px;font-size:1rem;"></i> WhatsApp</h3>
+                    <div class="form-group">
+                        <label class="form-label">Número WhatsApp (ex: 258840000000)</label>
+                        <input type="text" id="cfg-whatsapp" class="form-input" placeholder="258840000000" value="258840000000">
+                    </div>
+                    <button class="btn btn-gold btn-block" onclick="applyWhatsApp()"><i class="fas fa-check"></i> Atualizar Número</button>
+                </div>
+
+                <div class="admin-card">
+                    <h3><i class="fas fa-lock" style="margin-right:8px;font-size:1rem;"></i> Alterar Senha</h3>
+                    <div class="form-group">
+                        <label class="form-label">Senha Atual</label>
+                        <input type="password" id="cfg-oldpass" class="form-input" placeholder="••••••••">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Nova Senha</label>
+                        <input type="password" id="cfg-newpass" class="form-input" placeholder="••••••••">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Confirmar Nova Senha</label>
+                        <input type="password" id="cfg-confirmpass" class="form-input" placeholder="••••••••">
+                    </div>
+                    <button class="btn btn-gold btn-block" onclick="changePassword()"><i class="fas fa-key"></i> Alterar Senha</button>
+                </div>
+
+                <div class="admin-card">
+                    <h3><i class="fas fa-database" style="margin-right:8px;font-size:1rem;"></i> Dados do Sistema</h3>
+                    <p style="color:var(--gray);font-size:.88rem;margin-bottom:20px;">Exportar ou limpar todos os dados do site. Esta ação não pode ser desfeita.</p>
+                    <div style="display:flex;flex-direction:column;gap:10px;">
+                        <button class="btn btn-ghost btn-block" onclick="exportData()"><i class="fas fa-download"></i> Exportar Dados (JSON)</button>
+                        <button class="btn btn-block" style="background:rgba(201,55,63,.15);color:var(--primary);border:1px solid rgba(201,55,63,.3);" onclick="if(confirm('Resetar todos os dados do site?'))resetData()">
+                            <i class="fas fa-trash"></i> Resetar Tudo
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ══════════════════════════════ FOOTER ══════════════════════════════ -->
+<footer>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;margin-bottom:10px;">TOFO <span>SUMMER</span> HOUSE</div>
+    <div>Curadoria exclusiva por <span>Níquel</span> · Praia do Tofo, Inhambane, Moçambique</div>
+    <div style="margin-top:8px;">© 2026 Tofo Summer House. Todos os direitos reservados.</div>
+    <div style="margin-top:12px;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;opacity:.4;">XTACK OFICIAL</div>
+</footer>
+
+<!-- WhatsApp -->
+<a id="wa-global-btn" href="https://wa.me/258840000000" class="wa-btn" target="_blank" title="Contactar via WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- ══════════════════════════════ SCRIPT ══════════════════════════════ -->
+<script>
+    // ── CONFIG
+    let OWNER = JSON.parse(localStorage.getItem('niquel_owner')) || { email: "niquel@tofo.com", pass: "niquel2026a" };
+    let waNumber = localStorage.getItem('niquel_wa') || '258840000000';
+
+    // ── DEFAULT DATA
+    const DEFAULT_HOUSES = [
+        { id: 1, title: "Níquel Elite Villa",  price: "15.000 MT / noite", img: "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=700&q=80", status: "available" },
+        { id: 2, title: "Tofo Beach House",    price: "9.000 MT / noite",  img: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=700&q=80", status: "available" },
+        { id: 3, title: "Índico Pearl Cabin",  price: "6.500 MT / noite",  img: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=700&q=80", status: "available" }
+    ];
+    const DEFAULT_PROVS = [
+        { name: "Inhambane", desc: "Pérola do Índico — Praia do Tofo e Barra",    img: "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=700&q=80" },
+        { name: "Maputo",    desc: "Capital vibrante com história e modernidade",  img: "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=700&q=80" },
+        { name: "Bazaruto",  desc: "Arquipélago virgem no coração do Índico",      img: "https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?auto=format&fit=crop&w=700&q=80" }
+    ];
+
+    // ── STATE
+    let db_houses     = JSON.parse(localStorage.getItem('niquel_houses'))    || DEFAULT_HOUSES;
+    let db_provincias = JSON.parse(localStorage.getItem('niquel_provs'))     || DEFAULT_PROVS;
+    let db_appearance = JSON.parse(localStorage.getItem('niquel_appearance')) || {};
+    let db_content    = JSON.parse(localStorage.getItem('niquel_content'))   || {};
+    let isLoggedIn    = sessionStorage.getItem('isNiquel') === 'true';
+    let currentPage   = 'home';
+    let priceColor    = db_appearance.priceColor || '#C9A84C';
+
+    // ── UTILS
+    function toast(msg, dur = 2800) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), dur);
+    }
+
+    function save() {
+        localStorage.setItem('niquel_houses', JSON.stringify(db_houses));
+        localStorage.setItem('niquel_provs',  JSON.stringify(db_provincias));
+    }
+
+    function saveAppearance() {
+        localStorage.setItem('niquel_appearance', JSON.stringify(db_appearance));
+        toast('✓ Aparência guardada com sucesso!');
+    }
+
+    function previewImg(inputId, previewId) {
+        const url = document.getElementById(inputId).value;
+        const prev = document.getElementById(previewId);
+        if (url) { prev.src = url; prev.style.display = 'block'; }
+        else { prev.style.display = 'none'; }
+    }
+
+    // ── NAVIGATION
+    function showPage(id) {
+        if (id === 'admin-panel' && !isLoggedIn) { showPage('login-screen'); return; }
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        const target = document.getElementById(id);
+        if (target) { target.classList.add('active'); currentPage = id; window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        document.querySelectorAll('#desktop-nav a[data-page]').forEach(a => {
+            a.classList.toggle('active-link', a.dataset.page === id);
+        });
+    }
+
+    function navGo(id) { closeMobileMenu(); showPage(id); }
+
+    function toggleMobileMenu() { document.getElementById('mobile-nav').classList.toggle('open'); }
+    function closeMobileMenu()  { document.getElementById('mobile-nav').classList.remove('open'); }
+
+    // ── TABS
+    function switchTab(tabId) {
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.admin-tab').forEach(b => b.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        const tabs = ['tab-villas','tab-provincias','tab-aparencia','tab-conteudo','tab-config'];
+        const idx = tabs.indexOf(tabId);
+        document.querySelectorAll('.admin-tab')[idx].classList.add('active');
+    }
+
+    // ── AUTH
+    function login() {
+        const email = document.getElementById('admin-email').value.trim();
+        const pass  = document.getElementById('admin-pass').value;
+        if (email === OWNER.email && pass === OWNER.pass) {
+            isLoggedIn = true;
+            sessionStorage.setItem('isNiquel', 'true');
+            updateAuthUI();
+            showPage('admin-panel');
+            renderAll();
+            toast('✓ Bem-vindo ao painel, ' + OWNER.email.split('@')[0] + '!');
+        } else {
+            toast('✗ Credenciais inválidas. Tente novamente.');
+            document.getElementById('admin-pass').value = '';
+            document.getElementById('admin-pass').focus();
+        }
+    }
+
+    function logout() {
+        isLoggedIn = false;
+        sessionStorage.clear();
+        updateAuthUI();
+        showPage('home');
+        toast('Sessão encerrada com segurança.');
+    }
+
+    function updateAuthUI() {
+        document.getElementById('nav-login').style.display  = isLoggedIn ? 'none' : '';
+        document.getElementById('nav-logout').style.display = isLoggedIn ? '' : 'none';
+        document.getElementById('mob-login').style.display  = isLoggedIn ? 'none' : '';
+        document.getElementById('mob-logout').style.display = isLoggedIn ? '' : 'none';
+    }
+
+    function changePassword() {
+        const old = document.getElementById('cfg-oldpass').value;
+        const nw  = document.getElementById('cfg-newpass').value;
+        const cfm = document.getElementById('cfg-confirmpass').value;
+        if (old !== OWNER.pass) { toast('✗ Senha actual incorrecta.'); return; }
+        if (nw.length < 6)      { toast('✗ Nova senha deve ter pelo menos 6 caracteres.'); return; }
+        if (nw !== cfm)         { toast('✗ As novas senhas não coincidem.'); return; }
+        OWNER.pass = nw;
+        localStorage.setItem('niquel_owner', JSON.stringify(OWNER));
+        document.getElementById('cfg-oldpass').value = '';
+        document.getElementById('cfg-newpass').value = '';
+        document.getElementById('cfg-confirmpass').value = '';
+        toast('✓ Senha alterada com sucesso!');
+    }
+
+    // ── APPEARANCE
+    function updateColor(cssVar, value, swatchId, hexId) {
+        document.documentElement.style.setProperty(cssVar, value);
+        if (swatchId) document.getElementById(swatchId).style.background = value;
+        if (hexId)    document.getElementById(hexId).textContent = value;
+        db_appearance[cssVar] = value;
+    }
+
+    function applyDirectColor(selector, prop, value, swatchId, hexId) {
+        const els = document.querySelectorAll(selector);
+        els.forEach(el => el.style[prop] = value);
+        if (swatchId) document.getElementById(swatchId).style.background = value;
+        if (hexId)    document.getElementById(hexId).textContent = value;
+        db_appearance['direct_' + selector + '_' + prop] = value;
+    }
+
+    function setPriceColor(value, swatchId, hexId) {
+        priceColor = value;
+        document.querySelectorAll('.house-price').forEach(el => el.style.color = value);
+        if (swatchId) document.getElementById(swatchId).style.background = value;
+        if (hexId)    document.getElementById(hexId).textContent = value;
+        db_appearance.priceColor = value;
+    }
+
+    function applyStatNumColor(value, swatchId, hexId) {
+        ['ss1-num','ss2-num','ss3-num'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.style.color = value;
+        });
+        if (swatchId) document.getElementById(swatchId).style.background = value;
+        if (hexId)    document.getElementById(hexId).textContent = value;
+        db_appearance.statNumColor = value;
+    }
+
+    function liveHeroUrl(url) {
+        const prev = document.getElementById('hero-img-preview');
+        if (url) { prev.src = url; document.getElementById('hero-bg-el').style.backgroundImage = `url('${url}')`; }
+    }
+
+    function applyHeroImage() {
+        const url = document.getElementById('hero-img-url').value.trim();
+        const current = document.getElementById('hero-bg-el').style.backgroundImage;
+        // if already applied live, just save
+        if (!url && !current) { toast('⚠ Selecione ou cole uma imagem.'); return; }
+        const finalUrl = url || db_appearance.heroImg;
+        if (finalUrl) {
+            document.getElementById('hero-bg-el').style.backgroundImage = `url('${finalUrl}')`;
+            db_appearance.heroImg = finalUrl;
+        }
+        saveAppearance();
+        toast('✓ Imagem guardada!');
+    }
+
+    function resetHeroImage() {
+        const defaultUrl = 'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=1920&q=90';
+        document.getElementById('hero-bg-el').style.backgroundImage = `url('${defaultUrl}')`;
+        document.getElementById('hero-img-preview').src = defaultUrl;
+        document.getElementById('hero-img-url').value = '';
+        delete db_appearance.heroImg;
+        saveAppearance();
+        toast('✓ Imagem reposta ao original.');
+    }
+
+    function applySobreImage() {
+        const url = document.getElementById('sobre-img-url').value.trim();
+        if (!url) { toast('⚠ Insira um URL válido.'); return; }
+        document.getElementById('sobre-img-el').src = url;
+        db_appearance.sobreImg = url;
+        saveAppearance();
+        toast('✓ Foto do Dono actualizada!');
+    }
+
+    // ── CONTENT EDITORS
+    function applyHeroTexts() {
+        const ew  = document.getElementById('edit-eyebrow').value;
+        const sub = document.getElementById('edit-sub').value;
+        document.getElementById('hero-eyebrow-el').textContent = ew;
+        document.getElementById('hero-sub-el').textContent = sub;
+        db_content.heroEyebrow = ew;
+        db_content.heroSub = sub;
+        localStorage.setItem('niquel_content', JSON.stringify(db_content));
+        toast('✓ Textos do Hero aplicados!');
+    }
+
+    function applyStats() {
+        const map = [
+            ['edit-s1n','stat1-num'], ['edit-s1l','stat1-lbl'],
+            ['edit-s2n','stat2-num'], ['edit-s2l','stat2-lbl'],
+            ['edit-s3n','stat3-num'], ['edit-s3l','stat3-lbl'],
+            ['edit-s4n','stat4-num'], ['edit-s4l','stat4-lbl'],
+        ];
+        map.forEach(([inp, el]) => {
+            const v = document.getElementById(inp).value;
+            document.getElementById(el).textContent = v;
+            db_content['stat_' + el] = v;
+        });
+        localStorage.setItem('niquel_content', JSON.stringify(db_content));
+        toast('✓ Estatísticas actualizadas!');
+    }
+
+    function applySobreTexts() {
+        const name  = document.getElementById('edit-sname').value;
+        const role  = document.getElementById('edit-srole').value;
+        const t1    = document.getElementById('edit-stext1').value;
+        const t2    = document.getElementById('edit-stext2').value;
+        const s1    = document.getElementById('edit-ss1').value;
+        const s2    = document.getElementById('edit-ss2').value;
+        const s3    = document.getElementById('edit-ss3').value;
+        document.getElementById('sobre-name-el').textContent  = name;
+        document.getElementById('sobre-role-el').textContent  = role;
+        document.getElementById('sobre-text1-el').textContent = t1;
+        document.getElementById('sobre-text2-el').textContent = t2;
+        document.getElementById('ss1-num').textContent = s1;
+        document.getElementById('ss2-num').textContent = s2;
+        document.getElementById('ss3-num').textContent = s3;
+        Object.assign(db_content, { sobreName:name, sobreRole:role, sobreText1:t1, sobreText2:t2, ss1:s1, ss2:s2, ss3:s3 });
+        localStorage.setItem('niquel_content', JSON.stringify(db_content));
+        toast('✓ Textos do Dono actualizados!');
+    }
+
+    function applySectionDescs() {
+        const vd = document.getElementById('edit-villasdesc').value;
+        const pd = document.getElementById('edit-provsdesc').value;
+        document.getElementById('villas-desc').textContent = vd;
+        document.getElementById('provs-desc').textContent = pd;
+        db_content.villasDesc = vd;
+        db_content.provsDesc  = pd;
+        localStorage.setItem('niquel_content', JSON.stringify(db_content));
+        toast('✓ Descrições actualizadas!');
+    }
+
+    function applyWhatsApp() {
+        const num = document.getElementById('cfg-whatsapp').value.trim().replace(/\D/g,'');
+        if (!num) { toast('⚠ Número inválido.'); return; }
+        waNumber = num;
+        localStorage.setItem('niquel_wa', num);
+        document.getElementById('wa-global-btn').href = `https://wa.me/${num}`;
+        document.querySelectorAll('[data-wa]').forEach(el => {
+            el.href = `https://wa.me/${num}?text=${el.dataset.wamsg || ''}`;
+        });
+        toast('✓ WhatsApp actualizado!');
+    }
+
+    // ── CRUD
+    function addHouse() {
+        const title  = document.getElementById('h-title').value.trim();
+        const price  = document.getElementById('h-price').value.trim();
+        const status = document.getElementById('h-status').value;
+        if (!title || !price) { toast('⚠ Preencha nome e preço da villa.'); return; }
+        // collect photos from grid
+        const grid = document.getElementById('h-photos-grid');
+        const photos = Array.from(grid.querySelectorAll('.photo-thumb:not(.add-slot) img')).map(img => img.src).filter(Boolean);
+        if (!photos.length) {
+            photos.push('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=700&q=80');
+        }
+        db_houses.push({ id: Date.now(), title, price, photos, status });
+        save(); renderAll();
+        document.getElementById('h-title').value = '';
+        document.getElementById('h-price').value = '';
+        // reset photo grid
+        grid.innerHTML = `<div class="photo-thumb add-slot" onclick="document.getElementById('h-add-photo').click()" title="Adicionar foto">
+            <i class="fas fa-plus"></i>
+            <input type="file" id="h-add-photo" accept="image/*" multiple style="display:none;" onchange="handleMultiPhotoAdd(this,'h-photos-grid')">
+        </div>`;
+        toast('✓ Villa adicionada com sucesso!');
+    }
+
+    function addProvincia() {
+        const name = document.getElementById('p-name').value.trim();
+        const desc = document.getElementById('p-desc').value.trim();
+        const fileInput = document.getElementById('p-img-file');
+        const fileDataUrl = fileInput._dataUrl || '';
+        const urlVal = document.getElementById('p-img').value.trim();
+        const img  = fileDataUrl || urlVal || 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=700&q=80';
+        if (!name || !desc) { toast('⚠ Preencha nome e descrição.'); return; }
+        db_provincias.push({ name, desc, img });
+        save(); renderAll();
+        document.getElementById('p-name').value = '';
+        document.getElementById('p-desc').value = '';
+        document.getElementById('p-img').value  = '';
+        document.getElementById('p-img-preview').style.display = 'none';
+        fileInput._dataUrl = null; fileInput.value = '';
+        toast('✓ Destino adicionado!');
+    }
+
+    function toggleStatus(id) {
+        db_houses = db_houses.map(h => { if (h.id === id) h.status = h.status === 'available' ? 'sold' : 'available'; return h; });
+        save(); renderAll();
+        toast('Status actualizado.');
+    }
+
+    function deleteHouse(id) {
+        if (!confirm('Remover esta villa?')) return;
+        db_houses = db_houses.filter(h => h.id !== id);
+        save(); renderAll();
+        toast('Villa removida.');
+    }
+
+    function deleteProvincia(idx) {
+        if (!confirm('Remover este destino?')) return;
+        db_provincias.splice(idx, 1);
+        save(); renderAll();
+        toast('Destino removido.');
+    }
+
+    function resetData() {
+        localStorage.clear();
+        sessionStorage.clear();
+        location.reload();
+    }
+
+    function exportData() {
+        const data = {
+            houses: db_houses, provincias: db_provincias,
+            appearance: db_appearance, content: db_content
+        };
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        const url  = URL.createObjectURL(blob);
+        const a    = document.createElement('a');
+        a.href = url; a.download = 'tofo-summer-data.json'; a.click();
+        URL.revokeObjectURL(url);
+        toast('✓ Dados exportados!');
+    }
+
+    // ── RESERVA COM DATAS
+    function reservarVilla(id, title, wa) {
+        const checkin  = document.getElementById('checkin-' + id)?.value;
+        const checkout = document.getElementById('checkout-' + id)?.value;
+        let msg = `Olá Níquel, tenho interesse na ${title}`;
+        if (checkin && checkout) {
+            if (checkout <= checkin) { toast('⚠ Check-out deve ser depois do check-in.'); return; }
+            msg += `%0ACheck-in: ${checkin}%0ACheck-out: ${checkout}`;
+        } else if (checkin || checkout) {
+            toast('⚠ Preencha ambas as datas ou deixe em branco.'); return;
+        }
+        window.open(`https://wa.me/${wa}?text=${encodeURIComponent(msg).replace(/%250A/g,'%0A')}`, '_blank');
+    }
+
+    // ── FILE UPLOADS (base64 stored locally)
+    function readFileAsDataURL(file, callback) {
+        const reader = new FileReader();
+        reader.onload = e => callback(e.target.result);
+        reader.readAsDataURL(file);
+    }
+
+    function handleVillaFileUpload(input) {
+        if (!input.files[0]) return;
+        readFileAsDataURL(input.files[0], dataUrl => {
+            document.getElementById('h-img').value = '';
+            const prev = document.getElementById('h-img-preview');
+            prev.src = dataUrl; prev.style.display = 'block';
+            // store temporarily on input element for addHouse to read
+            input._dataUrl = dataUrl;
+        });
+    }
+
+    function handleProvFileUpload(input) {
+        if (!input.files[0]) return;
+        readFileAsDataURL(input.files[0], dataUrl => {
+            document.getElementById('p-img').value = '';
+            const prev = document.getElementById('p-img-preview');
+            prev.src = dataUrl; prev.style.display = 'block';
+            input._dataUrl = dataUrl;
+        });
+    }
+
+    function handleHeroFileUpload(input) {
+        if (!input.files[0]) return;
+        readFileAsDataURL(input.files[0], dataUrl => {
+            document.getElementById('hero-img-preview').src = dataUrl;
+            document.getElementById('hero-img-url').value = '';
+            document.getElementById('hero-bg-el').style.backgroundImage = `url('${dataUrl}')`;
+            db_appearance.heroImg = dataUrl;
+            saveAppearance();
+            toast('✓ Imagem do Hero actualizada!');
+        });
+    }
+
+    function handleSobreFileUpload(input) {
+        if (!input.files[0]) return;
+        readFileAsDataURL(input.files[0], dataUrl => {
+            document.getElementById('sobre-img-preview').src = dataUrl;
+            document.getElementById('sobre-img-url').value = '';
+            document.getElementById('sobre-img-el').src = dataUrl;
+            db_appearance.sobreImg = dataUrl;
+            saveAppearance();
+            toast('✓ Foto do Dono actualizada!');
+        });
+    }
+
+    // ── RENDER
+    function renderAll() {
+        renderHouses();
+        renderProvincias();
+        if (isLoggedIn) { renderAdminHouses(); renderAdminProvs(); }
+    }
+
+    function renderHouses() {
+        const c = document.getElementById('display-houses');
+        if (!c) return;
+        if (!db_houses.length) {
+            c.innerHTML = '<div class="empty-state"><i class="fas fa-home" style="opacity:.3;margin-right:8px;"></i>Nenhuma villa cadastrada ainda.</div>';
+            return;
+        }
+        const today = new Date().toISOString().split('T')[0];
+        c.innerHTML = db_houses.map(h => {
+            // support both old single img and new multi photos
+            const photos = h.photos && h.photos.length ? h.photos : [h.img || 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=700&q=80'];
+            const multiPhoto = photos.length > 1;
+            const slides = photos.map((src,i) => `
+                <div class="gallery-slide">
+                    <img src="${src}" alt="${h.title} foto ${i+1}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=700&q=80'">
+                </div>`).join('');
+            const dots = multiPhoto ? `<div class="gallery-dots">${photos.map((_,i) => `<div class="gallery-dot${i===0?' active':''}" onclick="gallerGo('g-${h.id}',${i})"></div>`).join('')}</div>` : '';
+            const count = multiPhoto ? `<div class="gallery-count"><i class="fas fa-images" style="margin-right:4px;font-size:.6rem;"></i><span id="g-${h.id}-count">1/${photos.length}</span></div>` : '';
+            const arrows = multiPhoto ? `
+                <button class="gallery-arrow prev hidden" id="g-${h.id}-prev" onclick="galleryStep('g-${h.id}',-1,${photos.length})"><i class="fas fa-chevron-left"></i></button>
+                <button class="gallery-arrow next" id="g-${h.id}-next" onclick="galleryStep('g-${h.id}',1,${photos.length})"><i class="fas fa-chevron-right"></i></button>` : '';
+            return `
+            <div class="house-card ${h.status === 'sold' ? 'sold-out' : ''}">
+                ${h.status === 'sold' ? '<div class="sold-badge">ESGOTADO</div>' : ''}
+                <div class="gallery-wrap" id="g-${h.id}-wrap">
+                    <div class="gallery-track" id="g-${h.id}" data-idx="0">${slides}</div>
+                    ${arrows}${dots}${count}
+                </div>
+                <div class="house-body">
+                    <div class="house-title">${h.title}</div>
+                    <div class="house-price" style="color:${priceColor}">${h.price}</div>
+                    ${h.status !== 'sold' ? `
+                    <div class="date-picker-row">
+                        <div class="date-field">
+                            <label>Check-in</label>
+                            <input type="date" id="checkin-${h.id}" min="${today}">
+                        </div>
+                        <div class="date-field">
+                            <label>Check-out</label>
+                            <input type="date" id="checkout-${h.id}" min="${today}">
+                        </div>
+                    </div>
+                    <div class="house-actions">
+                        <button onclick="reservarVilla(${h.id},'${h.title.replace(/'/g,"\\'")}','${waNumber}')" class="btn btn-gold btn-sm" style="width:100%;justify-content:center;"><i class="fab fa-whatsapp"></i> Reservar</button>
+                    </div>` : ''}
+                </div>
+            </div>`;
+        }).join('');
+    }
+
+    // ── GALLERY CONTROLS
+    function galleryStep(gid, dir, total) {
+        const track = document.getElementById(gid);
+        if (!track) return;
+        let idx = parseInt(track.dataset.idx) + dir;
+        idx = Math.max(0, Math.min(total - 1, idx));
+        gallerGo(gid, idx);
+    }
+
+    function gallerGo(gid, idx) {
+        const track = document.getElementById(gid);
+        if (!track) return;
+        const total = track.children.length;
+        track.style.transform = `translateX(-${idx * 100}%)`;
+        track.dataset.idx = idx;
+        // arrows
+        const prev = document.getElementById(gid + '-prev');
+        const next = document.getElementById(gid + '-next');
+        if (prev) prev.classList.toggle('hidden', idx === 0);
+        if (next) next.classList.toggle('hidden', idx === total - 1);
+        // dots
+        const wrap = track.parentElement;
+        wrap.querySelectorAll('.gallery-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+        // count
+        const cnt = document.getElementById(gid + '-count');
+        if (cnt) cnt.textContent = `${idx + 1}/${total}`;
+    }
+
+    // ── MULTI-PHOTO ADMIN FUNCTIONS
+    function handleMultiPhotoAdd(input, gridId) {
+        const grid = document.getElementById(gridId);
+        const currentCount = grid.querySelectorAll('.photo-thumb:not(.add-slot)').length;
+        const files = Array.from(input.files).slice(0, 10 - currentCount);
+        files.forEach(file => {
+            readFileAsDataURL(file, dataUrl => addThumbToGrid(grid, dataUrl));
+        });
+        input.value = '';
+    }
+
+    function addPhotoByUrl(inputId, gridId) {
+        const url = document.getElementById(inputId).value.trim();
+        if (!url) { toast('⚠ Insira um URL de imagem.'); return; }
+        const grid = document.getElementById(gridId);
+        if (grid.querySelectorAll('.photo-thumb:not(.add-slot)').length >= 10) { toast('⚠ Máximo de 10 fotos atingido.'); return; }
+        addThumbToGrid(grid, url);
+        document.getElementById(inputId).value = '';
+    }
+
+    function addThumbToGrid(grid, src) {
+        const addSlot = grid.querySelector('.add-slot');
+        const div = document.createElement('div');
+        div.className = 'photo-thumb';
+        div.innerHTML = `<img src="${src}" alt="foto"><button class="del-btn" onclick="this.parentElement.remove()" title="Remover"><i class="fas fa-times"></i></button>`;
+        grid.insertBefore(div, addSlot);
+        const count = grid.querySelectorAll('.photo-thumb:not(.add-slot)').length;
+        if (count >= 10 && addSlot) addSlot.style.display = 'none';
+    }
+
+
+
+    function renderAdminHouses() {
+        const c = document.getElementById('admin-houses-preview');
+        if (!c) return;
+        if (!db_houses.length) {
+            c.innerHTML = '<div style="color:var(--gray);font-size:.9rem;text-align:center;padding:20px;">Nenhuma villa.</div>';
+            return;
+        }
+        c.innerHTML = db_houses.map(h => `
+            <div class="admin-house-row">
+                <img src="${(h.photos&&h.photos[0])||h.img||'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=200&q=60'}" onerror="this.src='https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=200&q=60'" alt="${h.title}">
+                <div class="info">
+                    <div class="title">${h.title}</div>
+                    <div class="price">${h.price} ${h.photos&&h.photos.length>1?`<span style="color:var(--gray);font-size:.7rem;">(${h.photos.length} fotos)</span>`:''}</div>
+                    <div style="font-size:.7rem;color:${h.status==='available'?'#4CAF50':'var(--primary)'};margin-top:2px;">
+                        ${h.status === 'available' ? '● Disponível' : '● Esgotado'}
+                    </div>
+                </div>
+                <div class="actions">
+                    <button onclick="toggleStatus(${h.id})" class="btn btn-ghost btn-sm" title="Alterar status">
+                        <i class="fas fa-${h.status === 'available' ? 'toggle-on' : 'toggle-off'}"></i>
+                    </button>
+                    <button onclick="deleteHouse(${h.id})" class="btn btn-sm" style="background:rgba(201,55,63,.15);color:var(--primary);border:1px solid rgba(201,55,63,.3);" title="Remover">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function renderProvincias() {
+        const c = document.getElementById('display-provincias');
+        if (!c) return;
+        if (!db_provincias.length) {
+            c.innerHTML = '<div class="empty-state"><i class="fas fa-map" style="opacity:.3;margin-right:8px;"></i>Nenhuma província adicionada ainda.</div>';
+            return;
+        }
+        c.innerHTML = db_provincias.map(p => `
+            <div class="prov-card">
+                <img src="${p.img}" class="prov-img" alt="${p.name}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=700&q=80'">
+                <div class="prov-body">
+                    <div class="prov-name">${p.name}</div>
+                    <div class="prov-desc">${p.desc}</div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function renderAdminProvs() {
+        const c = document.getElementById('admin-provs-preview');
+        if (!c) return;
+        if (!db_provincias.length) {
+            c.innerHTML = '<div style="color:var(--gray);font-size:.9rem;text-align:center;padding:20px;">Nenhuma província.</div>';
+            return;
+        }
+        c.innerHTML = db_provincias.map((p, idx) => `
+            <div class="admin-house-row">
+                <img src="${p.img}" onerror="this.src='https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=200&q=60'" alt="${p.name}">
+                <div class="info">
+                    <div class="title">${p.name}</div>
+                    <div class="price">${p.desc}</div>
+                </div>
+                <div class="actions">
+                    <button onclick="deleteProvincia(${idx})" class="btn btn-sm" style="background:rgba(201,55,63,.15);color:var(--primary);border:1px solid rgba(201,55,63,.3);" title="Remover">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // ── RESTORE SAVED APPEARANCE & CONTENT
+    function restoreAppearance() {
+        const a = db_appearance;
+        const cssVars = ['--gold','--primary','--white','--bg','--bg-card','--gray'];
+        const swatchMap = {
+            '--gold':'sw-gold','--primary':'sw-primary','--white':'sw-white',
+            '--bg':'sw-bg','--bg-card':'sw-bgcard','--gray':'sw-gray'
+        };
+        const hexMap = {
+            '--gold':'hex-gold','--primary':'hex-primary','--white':'hex-white',
+            '--bg':'hex-bg','--bg-card':'hex-bgcard','--gray':'hex-gray'
+        };
+        cssVars.forEach(v => {
+            if (a[v]) {
+                document.documentElement.style.setProperty(v, a[v]);
+                const sw = document.getElementById(swatchMap[v]);
+                const hx = document.getElementById(hexMap[v]);
+                if (sw) sw.style.background = a[v];
+                if (hx) hx.textContent = a[v];
+                const colorInput = sw?.querySelector('input[type="color"]');
+                if (colorInput) colorInput.value = a[v];
+            }
+        });
+        if (a.heroImg) {
+            document.getElementById('hero-bg-el').style.backgroundImage = `url('${a.heroImg}')`;
+            document.getElementById('hero-img-preview').src = a.heroImg;
+        } else {
+            // set default ocean image on background element
+            document.getElementById('hero-bg-el').style.backgroundImage = `url('https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=1920&q=90')`;
+        }
+        if (a.sobreImg) {
+            document.getElementById('sobre-img-el').src = a.sobreImg;
+            document.getElementById('sobre-img-preview').src = a.sobreImg;
+            document.getElementById('sobre-img-url').value   = a.sobreImg;
+        }
+        if (a.priceColor) priceColor = a.priceColor;
+        if (a.statNumColor) applyStatNumColor(a.statNumColor);
+        // Direct element colors
+        Object.keys(a).forEach(k => {
+            if (k.startsWith('direct_')) {
+                const parts = k.replace('direct_','').split('_');
+                const prop  = parts.pop();
+                const sel   = parts.join('_');
+                document.querySelectorAll(sel).forEach(el => el.style[prop] = a[k]);
+            }
+        });
+    }
+
+    function restoreContent() {
+        const c = db_content;
+        if (c.heroEyebrow) { document.getElementById('hero-eyebrow-el').textContent = c.heroEyebrow; document.getElementById('edit-eyebrow').value = c.heroEyebrow; }
+        if (c.heroSub)     { document.getElementById('hero-sub-el').textContent = c.heroSub; document.getElementById('edit-sub').value = c.heroSub; }
+        if (c.sobreName)   { document.getElementById('sobre-name-el').textContent = c.sobreName; document.getElementById('edit-sname').value = c.sobreName; }
+        if (c.sobreRole)   { document.getElementById('sobre-role-el').textContent = c.sobreRole; document.getElementById('edit-srole').value = c.sobreRole; }
+        if (c.sobreText1)  { document.getElementById('sobre-text1-el').textContent = c.sobreText1; document.getElementById('edit-stext1').value = c.sobreText1; }
+        if (c.sobreText2)  { document.getElementById('sobre-text2-el').textContent = c.sobreText2; document.getElementById('edit-stext2').value = c.sobreText2; }
+        if (c.ss1)         { document.getElementById('ss1-num').textContent = c.ss1; document.getElementById('edit-ss1').value = c.ss1; }
+        if (c.ss2)         { document.getElementById('ss2-num').textContent = c.ss2; document.getElementById('edit-ss2').value = c.ss2; }
+        if (c.ss3)         { document.getElementById('ss3-num').textContent = c.ss3; document.getElementById('edit-ss3').value = c.ss3; }
+        if (c.villasDesc)  { document.getElementById('villas-desc').textContent = c.villasDesc; document.getElementById('edit-villasdesc').value = c.villasDesc; }
+        if (c.provsDesc)   { document.getElementById('provs-desc').textContent = c.provsDesc; document.getElementById('edit-provsdesc').value = c.provsDesc; }
+        const statMap = [['stat1-num','edit-s1n'],['stat1-lbl','edit-s1l'],['stat2-num','edit-s2n'],['stat2-lbl','edit-s2l'],['stat3-num','edit-s3n'],['stat3-lbl','edit-s3l'],['stat4-num','edit-s4n'],['stat4-lbl','edit-s4l']];
+        statMap.forEach(([el,inp]) => {
+            const v = c['stat_' + el];
+            if (v) { document.getElementById(el).textContent = v; document.getElementById(inp).value = v; }
+        });
+    }
+
+    // ── INIT
+    window.addEventListener('DOMContentLoaded', () => {
+        updateAuthUI();
+        restoreAppearance();
+        restoreContent();
+        renderAll();
+        // WhatsApp button
+        document.getElementById('wa-global-btn').href = `https://wa.me/${waNumber}`;
+        document.getElementById('cfg-whatsapp').value = waNumber;
+    });
+
+    // Close mobile menu on outside click
+    document.addEventListener('click', e => {
+        const mn = document.getElementById('mobile-nav');
+        const hb = document.getElementById('hamburger');
+        if (mn.classList.contains('open') && !mn.contains(e.target) && !hb.contains(e.target)) {
+            closeMobileMenu();
+        }
+    });
+</script>
+</body>
+</html>
